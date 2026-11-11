@@ -1,0 +1,1 @@
+import{A as e}from"./index-DFVHuzNZ.js";var t=0;function n(){let n=e(!1),r=e(null),i=null;return{isOpen:n,options:r,open:e=>new Promise(a=>{t++,r.value={title:`Confirmação`,confirmText:`Confirmar`,cancelText:`Cancelar`,variant:`danger`,...e},n.value=!0,i=a}),close:()=>{n.value=!1,i&&=(i(!1),null)},confirm:()=>{n.value=!1,i&&=(i(!0),null)}}}export{n as t};

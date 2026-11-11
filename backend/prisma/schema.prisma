@@ -1,0 +1,68 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum StatusContrato {
+  ATIVO
+  ENCERRADO
+  SUSPENSO
+}
+
+model Funcionario {
+  id           String      @id @default(uuid())
+  nome         String
+  cpf          String      @unique
+  email        String      @unique
+  departamento String
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  deletedAt    DateTime?
+  contratos    ContratoFuncionario[]
+
+  @@map("funcionarios")
+}
+
+model Contrato {
+  id           String      @id @default(uuid())
+  nome         String
+  descricao    String
+  status       StatusContrato @default(ATIVO)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  deletedAt    DateTime?
+  funcionarios ContratoFuncionario[]
+
+  @@map("contratos")
+}
+
+model ContratoFuncionario {
+  contratoId    String
+  funcionarioId String
+  vinculadoEm   DateTime @default(now())
+
+  contrato    Contrato    @relation(fields: [contratoId], references: [id], onDelete: Cascade)
+  funcionario Funcionario @relation(fields: [funcionarioId], references: [id], onDelete: Cascade)
+
+  @@id([contratoId, funcionarioId])
+  @@map("contrato_funcionarios")
+}
+
+model AuditLog {
+  id           String   @id @default(uuid())
+  entityType   String   @map("entitytype")
+  entityId     String   @map("entityid")
+  action       String
+  oldData      Json?    @map("olddata")
+  newData      Json?    @map("newdata")
+  userIp       String?  @map("userip")
+  userAgent    String?  @map("useragent")
+  createdAt    DateTime @default(now()) @map("createdat")
+
+  @@index([entityType, entityId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
