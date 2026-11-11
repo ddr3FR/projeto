@@ -216,20 +216,3 @@ npm run test:unit  # Componentes + stores
 | **Departamento** | String com `@IsIn([...validos])` | Simples, permite filtro, evita migração de enum no banco |
 | **Vínculos** | `PUT /contratos/:id/funcionarios` | Idempotente, substitui lista atômica em transação |
 | **Prisma 7** | Driver adapter (`@prisma/adapter-pg`) + `prisma.config.ts` | Requisito da versão 7.x |
-
-## O que Melhoraria com Mais Tempo
-
-1. **Autenticação/Autorização** — JWT + roles (admin, gestor, visualizador)
-2. **Testes E2E completos** — Supertest para todos os endpoints críticos
-3. **Validação de CPF no frontend** — Máscara e validação client-side
-4. **Internacionalização (i18n)** — Preparar para múltiplos idiomas
-5. **Logs estruturados** — Pino/Winston + correlation IDs
-6. **Documentação OpenAPI** — Swagger UI em `/api/docs`
-7. **Cache** — Redis para listagens frequentes
-8. **Auditoria** — Trigger/history table para mudanças sensíveis
-9. **CI/CD** — GitHub Actions com lint, test, build, deploy
-10. **Frontend polido** — Toast notifications, loading skeletons, acessibilidade (ARIA)
-
-## Licença
-
-UNLICENSED — Teste técnico.
